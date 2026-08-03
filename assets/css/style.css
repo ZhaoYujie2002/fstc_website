@@ -750,6 +750,11 @@ footer.site-footer {
 .cv-tbtn.prev { left: 0; }
 .cv-tbtn.next { right: 0; }
 
+/* 只有一张图的案例：不显示箭头、计数与缩略图条 */
+.case-viewer.single .cv-arrow,
+.case-viewer.single .cv-count,
+.case-viewer.single .cv-thumbs-outer { display: none; }
+
 @media (max-width: 820px) {
   .cv-stage { height: clamp(240px, 62vw, 420px); }
   .cv-arrow { opacity: 1; width: 40px; height: 40px; }
