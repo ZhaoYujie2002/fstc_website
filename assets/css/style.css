@@ -142,10 +142,8 @@ nav.main-nav .sub-menu a {
 nav.main-nav .sub-menu a::after { display: none; }
 nav.main-nav .sub-menu a:hover { background: var(--bg-soft); color: var(--blue); }
 
-/* 语言切换 */
+/* 语言切换：字号/字重/颜色与其他导航项一致 */
 nav.main-nav .lang-item { margin-left: 6px; }
-nav.main-nav .lang-item a { color: var(--gray); font-size: 15px; letter-spacing: .5px; }
-nav.main-nav .lang-item a:hover { color: var(--blue); }
 
 .nav-toggle {
   display: none;
