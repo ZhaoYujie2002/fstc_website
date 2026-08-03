@@ -94,6 +94,49 @@
   }, { threshold: 0.4 });
   document.querySelectorAll("[data-count]").forEach((el) => numIO.observe(el));
 
+  /* 产品页：侧栏搜索过滤 + 分类高亮 */
+  const prodSearch = document.getElementById("prodSearch");
+  if (prodSearch) {
+    const sections = Array.from(document.querySelectorAll(".prod-main .prod-section"));
+    let empty = null;
+    prodSearch.addEventListener("input", () => {
+      const q = prodSearch.value.trim().toLowerCase();
+      let hits = 0;
+      sections.forEach((sec) => {
+        let shown = 0;
+        sec.querySelectorAll("[data-search]").forEach((card) => {
+          const ok = !q || card.dataset.search.toLowerCase().includes(q);
+          card.style.display = ok ? "" : "none";
+          if (ok) shown++;
+        });
+        sec.style.display = shown ? "" : "none";
+        hits += shown;
+      });
+      if (!empty) {
+        empty = document.createElement("p");
+        empty.className = "prod-empty";
+        empty.textContent = "没有找到匹配的产品，请更换关键词，或直接致电 0757-82129245 咨询。";
+        document.querySelector(".prod-main").appendChild(empty);
+      }
+      empty.style.display = hits ? "none" : "";
+    });
+  }
+
+  const sideCats = Array.from(document.querySelectorAll(".side-cats a"));
+  if (sideCats.length) {
+    const targets = sideCats
+      .map((a) => ({ a, sec: document.querySelector(a.getAttribute("href")) }))
+      .filter((t) => t.sec);
+    const mark = () => {
+      const y = window.scrollY + 160;
+      let cur = targets[0];
+      targets.forEach((t) => { if (t.sec.offsetTop <= y) cur = t; });
+      targets.forEach((t) => t.a.classList.toggle("on", t === cur));
+    };
+    window.addEventListener("scroll", mark, { passive: true });
+    mark();
+  }
+
   /* 表单占位提交 */
   document.querySelectorAll("form[data-demo]").forEach((f) => {
     f.addEventListener("submit", (e) => {
