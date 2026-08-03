@@ -649,14 +649,6 @@ footer.site-footer {
 }
 .case-head h2 { font-size: clamp(21px, 2.2vw, 27px); letter-spacing: 1px; }
 .btn.sm { padding: 9px 22px; font-size: 14px; }
-.case-note {
-  background: var(--bg-soft);
-  color: #3d4a5c;
-  font-size: 14.5px;
-  padding: 13px 18px;
-  margin: 22px 0 20px;
-  border-radius: var(--radius);
-}
 
 .cv-stage {
   position: relative;
@@ -751,6 +743,7 @@ footer.site-footer {
 .cv-tbtn.next { right: 0; }
 
 /* 只有一张图的案例：不显示箭头、计数与缩略图条 */
+.case-viewer { margin-top: 26px; }
 .case-viewer.single .cv-arrow,
 .case-viewer.single .cv-count,
 .case-viewer.single .cv-thumbs-outer { display: none; }
