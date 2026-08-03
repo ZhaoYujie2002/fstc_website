@@ -94,6 +94,54 @@
   }, { threshold: 0.4 });
   document.querySelectorAll("[data-count]").forEach((el) => numIO.observe(el));
 
+  /* 案例详情图集：大图 + 缩略图条 */
+  document.querySelectorAll("[data-viewer]").forEach((box) => {
+    const main = box.querySelector(".cv-main");
+    const cap = box.querySelector(".cv-cap");
+    const cur = box.querySelector(".cv-count .cur");
+    const strip = box.querySelector(".cv-thumbs");
+    const thumbs = Array.from(box.querySelectorAll(".cv-thumb"));
+    if (!thumbs.length) return;
+    let i = 0;
+
+    function show(n, scroll) {
+      i = (n + thumbs.length) % thumbs.length;
+      const t = thumbs[i];
+      main.src = t.dataset.full;
+      main.alt = t.querySelector("img").alt;
+      if (cap) cap.textContent = t.dataset.cap || "";
+      if (cur) cur.textContent = String(i + 1);
+      thumbs.forEach((el) => el.classList.toggle("on", el === t));
+      if (scroll !== false) {
+        strip.scrollTo({
+          left: t.offsetLeft - strip.clientWidth / 2 + t.clientWidth / 2,
+          behavior: "smooth",
+        });
+      }
+    }
+
+    thumbs.forEach((t, n) => t.addEventListener("click", () => show(n)));
+    box.querySelector(".cv-arrow.prev").addEventListener("click", () => show(i - 1));
+    box.querySelector(".cv-arrow.next").addEventListener("click", () => show(i + 1));
+
+    const page = () => strip.clientWidth * 0.85;
+    box.querySelector(".cv-tbtn.prev").addEventListener("click", () =>
+      strip.scrollBy({ left: -page(), behavior: "smooth" }));
+    box.querySelector(".cv-tbtn.next").addEventListener("click", () =>
+      strip.scrollBy({ left: page(), behavior: "smooth" }));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") show(i - 1);
+      if (e.key === "ArrowRight") show(i + 1);
+    });
+
+    /* 缩略图少于一屏时隐藏左右翻页按钮 */
+    requestAnimationFrame(() => {
+      if (strip.scrollWidth <= strip.clientWidth + 4)
+        box.querySelectorAll(".cv-tbtn").forEach((b) => (b.style.display = "none"));
+    });
+  });
+
   /* 产品页：侧栏搜索过滤 + 分类高亮 */
   const prodSearch = document.getElementById("prodSearch");
   if (prodSearch) {
