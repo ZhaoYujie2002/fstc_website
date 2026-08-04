@@ -225,6 +225,12 @@ nav.main-nav .lang-item { margin-left: 6px; }
 .page-banner .wrap { position: relative; z-index: 2; color: #fff; }
 .page-banner h1 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: 2px; }
 .page-banner .sub { font-size: 15px; opacity: .82; letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; }
+/* 浅色 banner（关于天辰 / 产品中心 / 技术咨询，与英文站一致） */
+.page-banner.light::after {
+  background: linear-gradient(90deg, rgba(255,255,255,.80) 0%, rgba(255,255,255,.42) 45%, rgba(255,255,255,0) 100%);
+}
+.page-banner.light .wrap { color: var(--ink); }
+.page-banner.light .sub { color: var(--gray); opacity: 1; }
 .breadcrumb { margin-top: 14px; font-size: 13.5px; opacity: .8; }
 .breadcrumb a:hover { text-decoration: underline; }
 
@@ -299,6 +305,25 @@ section.block { padding: clamp(60px, 7vw, 100px) 0; }
   background: radial-gradient(circle, rgba(14,79,158,.15), transparent 70%);
 }
 .about-grid .pic img { width: 100%; height: 100%; object-fit: cover; }
+/* 图在左、文字在右 */
+.about-grid.pic-left { grid-template-columns: 1fr 1.15fr; }
+.about-grid.pic-left .text p { color: #3d4a5c; margin-bottom: 16px; text-align: justify; }
+/* 上下两张图叠放（关于天辰-公司简介） */
+.about-grid .pic.stack {
+  display: grid;
+  gap: 16px;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+.about-grid .pic.stack::before { content: none; }
+.about-grid .pic.stack img {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
 
 .stats {
   margin-top: clamp(48px, 5vw, 72px);
@@ -806,6 +831,9 @@ footer.site-footer {
 .news-list .row:hover { background: var(--bg-soft); padding-inline: 18px; }
 .news-list .thumb { aspect-ratio: 16/9; border-radius: var(--radius); overflow: hidden; }
 .news-list .thumb img { width: 100%; height: 100%; object-fit: cover; }
+/* 证书类竖图缩略图完整显示 */
+.news-list .thumb.contain, .news-card .thumb.contain { background: var(--bg-soft); }
+.news-list .thumb.contain img, .news-card .thumb.contain img { object-fit: contain; }
 .news-list h4 { font-size: 18.5px; margin-bottom: 8px; }
 .news-list p { color: var(--gray); font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .news-list .date { text-align: center; color: var(--gray); }
@@ -991,6 +1019,8 @@ footer.site-footer {
   white-space: nowrap;
 }
 .spec-table tbody tr:nth-child(even) { background: var(--bg-soft); }
+/* 技术咨询「天辰洁能抑钒剂系列产品型号」标题不加粗 */
+#standard .section-head h2 { font-weight: 400; }
 .spec-title { font-size: 22px; margin: 44px 0 6px; display: flex; align-items: center; gap: 12px; }
 .spec-title::before { content: ""; width: 6px; height: 22px; background: var(--blue); border-radius: 3px; }
 
@@ -1034,6 +1064,13 @@ footer.site-footer {
 .article .body h3 { margin: 28px 0 12px; font-size: 20px; }
 .article .photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
 .article .photos img { border-radius: var(--radius); width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+/* 单张配图 */
+.article .fig { margin: 30px 0 10px; }
+.article .fig img { display: block; width: 100%; max-width: 420px; border-radius: var(--radius); box-shadow: var(--shadow); }
+/* 图文分组（万吨产能一文的 1~5 小节） */
+.article .body h4 { margin: 22px 0 10px; font-size: 16px; color: var(--gray); font-weight: 600; }
+.article .photos.free { align-items: start; }
+.article .photos.free img { aspect-ratio: auto; height: auto; object-fit: contain; }
 .article-nav { display: flex; justify-content: space-between; margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14.5px; gap: 20px; flex-wrap: wrap; }
 .article-nav a { color: var(--blue); }
 .article-nav a:hover { text-decoration: underline; }
