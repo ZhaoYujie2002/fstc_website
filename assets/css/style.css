@@ -66,7 +66,7 @@ header.site-header.scrolled { box-shadow: 0 4px 24px rgba(12,38,76,.08); }
 .brand { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
 .brand img { height: 56px; width: auto; }
 .brand-name { display: flex; flex-direction: column; line-height: 1.3; }
-.brand-name .cn { font-size: 23px; font-weight: 700; letter-spacing: 1.5px; color: var(--ink); }
+.brand-name .cn { font-size: 27px; font-weight: 700; letter-spacing: 1.5px; color: var(--ink); }
 .brand-name .en {
   font-size: 11px; color: var(--gray); letter-spacing: .4px;
   text-transform: uppercase; max-width: 224px; line-height: 1.35;
@@ -225,12 +225,6 @@ nav.main-nav .lang-item { margin-left: 6px; }
 .page-banner .wrap { position: relative; z-index: 2; color: #fff; }
 .page-banner h1 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: 2px; }
 .page-banner .sub { font-size: 15px; opacity: .82; letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; }
-/* 浅色 banner（关于天辰 / 产品中心 / 技术咨询，与英文站一致） */
-.page-banner.light::after {
-  background: linear-gradient(90deg, rgba(255,255,255,.80) 0%, rgba(255,255,255,.42) 45%, rgba(255,255,255,0) 100%);
-}
-.page-banner.light .wrap { color: var(--ink); }
-.page-banner.light .sub { color: var(--gray); opacity: 1; }
 .breadcrumb { margin-top: 14px; font-size: 13.5px; opacity: .8; }
 .breadcrumb a:hover { text-decoration: underline; }
 
@@ -257,6 +251,7 @@ section.block { padding: clamp(60px, 7vw, 100px) 0; }
   margin-top: 10px;
   letter-spacing: 1px;
 }
+.section-head h2.plain { font-weight: 400; }
 .section-head.center { text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
 .section-head.center .eyebrow::before { display: none; }
@@ -308,22 +303,18 @@ section.block { padding: clamp(60px, 7vw, 100px) 0; }
 /* 图在左、文字在右 */
 .about-grid.pic-left { grid-template-columns: 1fr 1.15fr; }
 .about-grid.pic-left .text p { color: #3d4a5c; margin-bottom: 16px; text-align: justify; }
-/* 上下两张图叠放（关于天辰-公司简介） */
-.about-grid .pic.stack {
-  display: grid;
-  gap: 16px;
+/* 拼图（带透明背景，整张显示不裁切） */
+.about-grid .pic.collage {
   border-radius: 0;
   overflow: visible;
   box-shadow: none;
 }
-.about-grid .pic.stack::before { content: none; }
-.about-grid .pic.stack img {
-  height: auto;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
+.about-grid .pic.collage::before { content: none; }
+.about-grid .pic.collage img { width: 100%; height: auto; object-fit: contain; }
+
+/* 公司简介：整幅文字，无配图 */
+.profile-text { max-width: 1000px; margin: 0 auto; }
+.profile-text p { color: #3d4a5c; margin-bottom: 16px; text-align: justify; text-indent: 2em; }
 
 .stats {
   margin-top: clamp(48px, 5vw, 72px);
