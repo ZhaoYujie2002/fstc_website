@@ -251,7 +251,6 @@ section.block { padding: clamp(60px, 7vw, 100px) 0; }
   margin-top: 10px;
   letter-spacing: 1px;
 }
-.section-head h2.plain { font-weight: 400; }
 .section-head.center { text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
 .section-head.center .eyebrow::before { display: none; }
